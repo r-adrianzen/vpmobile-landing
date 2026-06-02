@@ -1,4 +1,4 @@
-const FORM_ENDPOINT = 'https://formspree.io/f/TU_FORM_ID_AQUI';
+const FORM_ENDPOINT = 'https://formspree.io/f/mgobwvje';
 
 const INFO_CONTENT = {
     franquicias: {
