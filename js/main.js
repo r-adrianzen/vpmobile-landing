@@ -18,7 +18,7 @@ const INFO_CONTENT = {
     },
     amet: {
         subtitle: 'Para cadenas de retail',
-        title: 'Servicio 360 Amet',
+        title: 'Servicio Integrado de Instalación de Láminas',
         tags: ['Operación completa', 'Láminas AMET', 'Multidispositivo'],
         body: [
             'Amet 360 permite que tu tienda venda láminas protectoras de pantalla como servicio adicional. Ofrecemos máquinas de corte con láminas propias y una línea de cases, todo diseñado para adaptarse a la medida exacta de cada dispositivo.',
