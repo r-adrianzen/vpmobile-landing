@@ -634,7 +634,7 @@
                         class="btn-pulse bg-vp-orange text-white px-6 sm:px-8 py-3.5 rounded-md font-bold text-base hover:bg-orange-700 transition shadow-lg text-center">
                         Ver vacantes abiertas
                     </a>
-                    <button type="button" data-open-contact
+                    <button type="button" data-open-contact data-contact-motive="talento"
                         class="border-2 border-white/80 text-white px-6 sm:px-8 py-3.5 rounded-md font-bold text-base hover:bg-white/10 transition">
                         Quiero postular
                     </button>
@@ -708,7 +708,7 @@
                         class="btn-pulse bg-vp-orange text-white px-6 sm:px-8 py-3 rounded-md font-bold hover:bg-orange-700 transition shadow-lg text-center">
                         Ver vacantes en Computrabajo
                     </a>
-                    <button type="button" data-open-contact
+                    <button type="button" data-open-contact data-contact-motive="talento"
                         class="bg-vp-blue text-white px-6 sm:px-8 py-3 rounded-md font-bold hover:bg-blue-800 transition">
                         Déjanos tu información
                     </button>
@@ -770,6 +770,19 @@
                 </div>
 
                 <form id="contact-form" class="space-y-4">
+                    <div>
+                        <label for="motivo" class="block text-sm font-semibold text-gray-700 mb-1">¿Sobre qué deseas información? *</label>
+                        <select id="motivo" name="motivo" required
+                            class="form-input w-full border border-gray-300 rounded-md px-3 py-2 text-sm bg-white">
+                            <option value="" disabled selected>Selecciona una opción</option>
+                            <option value="distribucion">Distribución de accesorios (B2B / mayorista)</option>
+                            <option value="talento">Trabajar en VP Mobile</option>
+                            <option value="amet">Socio en láminas AMET (servicio en tienda)</option>
+                            <option value="franquicias">Franquicias y operación retail (Entel)</option>
+                            <option value="general">Otra consulta</option>
+                        </select>
+                        <p class="text-xs text-gray-500 mt-1">Así derivamos tu mensaje al equipo correcto.</p>
+                    </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label for="nombres" class="block text-sm font-semibold text-gray-700 mb-1">Nombres *</label>

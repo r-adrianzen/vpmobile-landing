@@ -1,5 +1,28 @@
 const FORM_ENDPOINT = 'https://formspree.io/f/mgobwvje';
 
+const CONTACT_MOTIVES = {
+    distribucion: {
+        label: 'Distribución de accesorios (B2B / mayorista)',
+        subject: 'Distribución B2B'
+    },
+    talento: {
+        label: 'Trabajar en VP Mobile',
+        subject: 'Talento / RR.HH.'
+    },
+    amet: {
+        label: 'Socio en láminas AMET (servicio en tienda)',
+        subject: 'Láminas AMET'
+    },
+    franquicias: {
+        label: 'Franquicias y operación retail (Entel)',
+        subject: 'Franquicias'
+    },
+    general: {
+        label: 'Otra consulta',
+        subject: 'Consulta general'
+    }
+};
+
 const INFO_CONTENT = {
     franquicias: {
         subtitle: 'División Retail',
@@ -74,7 +97,11 @@ function unlockBody() {
     document.body.style.overflow = '';
 }
 
-function openContactModal() {
+function getMotiveMeta(value) {
+    return CONTACT_MOTIVES[value] || CONTACT_MOTIVES.general;
+}
+
+function openContactModal(presetMotive) {
     if (!infoModal.classList.contains('hidden')) {
         closeInfoModal();
     }
@@ -82,7 +109,15 @@ function openContactModal() {
     contactModal.classList.remove('hidden');
     contactModal.setAttribute('aria-hidden', 'false');
     lockBody();
-    document.getElementById('nombres').focus();
+
+    const motiveField = contactForm.motivo;
+    if (presetMotive && CONTACT_MOTIVES[presetMotive]) {
+        motiveField.value = presetMotive;
+        document.getElementById('nombres').focus();
+    } else {
+        motiveField.value = '';
+        motiveField.focus();
+    }
 }
 
 function closeContactModal() {
@@ -111,6 +146,11 @@ function openInfoModal(key) {
         return '<li class="flex items-start gap-2"><span class="text-green-500 mt-0.5 shrink-0">✓</span><span>' + item + '</span></li>';
     }).join('');
 
+    const infoContactBtn = infoModal.querySelector('[data-open-contact]');
+    if (infoContactBtn && CONTACT_MOTIVES[key]) {
+        infoContactBtn.setAttribute('data-contact-motive', key);
+    }
+
     infoModal.classList.remove('hidden');
     infoModal.setAttribute('aria-hidden', 'false');
     lockBody();
@@ -131,7 +171,9 @@ function showMessage(text, isError) {
 }
 
 document.querySelectorAll('[data-open-contact]').forEach(function (btn) {
-    btn.addEventListener('click', openContactModal);
+    btn.addEventListener('click', function () {
+        openContactModal(btn.getAttribute('data-contact-motive') || '');
+    });
 });
 
 document.querySelectorAll('[data-close-contact]').forEach(function (el) {
@@ -166,12 +208,17 @@ contactForm.addEventListener('submit', async function (e) {
     submitBtn.textContent = 'Enviando...';
     formMessage.classList.add('hidden');
 
+    const motiveValue = contactForm.motivo.value;
+    const motiveMeta = getMotiveMeta(motiveValue);
+
     const payload = {
+        motivo: motiveMeta.label,
+        motivo_codigo: motiveValue,
         nombres: contactForm.nombres.value.trim(),
         apellidos: contactForm.apellidos.value.trim(),
         telefono: contactForm.telefono.value.trim(),
         correo: contactForm.correo.value.trim(),
-        _subject: 'Nuevo contacto desde vpmobile.pe'
+        _subject: '[' + motiveMeta.subject + '] Nuevo contacto desde vpmobile.com.pe'
     };
 
     try {
