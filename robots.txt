@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://vpmobile.pe/sitemap.xml
+Sitemap: https://vpmobile.com.pe/sitemap.xml
